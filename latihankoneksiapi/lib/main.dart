@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihankoneksiapi/user_model.dart';
 
 import 'postresort_model.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   PostResult postResult = null;
+  User user = null;
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +25,16 @@ class _MyAppState extends State<MyApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text((postResult != null)
-                ? postResult.id +
-                    " |" +
-                    postResult.name +
-                    "|" +
-                    postResult.job +
-                    "|" +
-                    postResult.created
-                : "Tidak ada data"),
+            Text(
+                (user != null) ? user.id + " |" + user.name : "Tidak ada data"),
             RaisedButton(
               onPressed: () {
-                PostResult.connectToAPI("Badu", "Dokter").then((value) {
-                  postResult = value;
+                User.connectToAPI("5").then((value) {
+                  user = value;
                   setState(() {});
                 });
               },
-              child: Text("POST"),
+              child: Text("GET"),
             )
           ],
         ),
